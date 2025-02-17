@@ -1,5 +1,7 @@
 package com.Rusya2054.sorters;
 
+import com.Rusya2054.settings.DefaultApplicationSettings;
+
 import java.util.concurrent.TimeUnit;
 
 public class TImSorter implements Sortable, SliceGateway{
@@ -17,16 +19,12 @@ public class TImSorter implements Sortable, SliceGateway{
     }
 
     @Override
-    public void sort() {
+    public void sort() throws InterruptedException{
         int n = endIndex - startIndex + 1;
         for (int i = startIndex; i < endIndex; i += MIN_RUN) {
             insertionSort(data, i, Math.min((i + MIN_RUN - 1), endIndex - 1));
             IterationCounter.swapCounter.incrementAndGet();
-            try {
-                TimeUnit.MILLISECONDS.sleep(20);
-            } catch (Exception ignore){
-
-            }
+            TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
         }
 
         for (int size = MIN_RUN; size < n; size *= 2) {
@@ -37,15 +35,11 @@ public class TImSorter implements Sortable, SliceGateway{
                     merge(data, left, mid, right);
                 }
                 IterationCounter.swapCounter.incrementAndGet();
-                try {
-                    TimeUnit.MILLISECONDS.sleep(20);
-                } catch (Exception ignore){
-
-                }
+                TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
             }
         }
     }
-    private void insertionSort(Integer[] data, int left, int right) {
+    private void insertionSort(Integer[] data, int left, int right) throws InterruptedException {
         for (int i = left + 1; i <= right; i++) {
             int key = data[i];
             int j = i - 1;
@@ -55,15 +49,11 @@ public class TImSorter implements Sortable, SliceGateway{
             }
             data[j + 1] = key;
             IterationCounter.swapCounter.incrementAndGet();
-            try {
-                TimeUnit.MILLISECONDS.sleep(20);
-            } catch (Exception ignore){
-
-            }
+            TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
         }
     }
 
-    private void merge(Integer[] data, int left, int mid, int right) {
+    private void merge(Integer[] data, int left, int mid, int right) throws InterruptedException {
         int len1 = mid - left + 1;
         int len2 = right - mid;
         Integer[] leftArray = new Integer[len1];
@@ -80,6 +70,8 @@ public class TImSorter implements Sortable, SliceGateway{
             } else {
                 data[k++] = rightArray[j++];
             }
+            IterationCounter.swapCounter.incrementAndGet();
+            TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
         }
         while (i < len1) {
             data[k++] = leftArray[i++];

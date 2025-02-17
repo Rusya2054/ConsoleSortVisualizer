@@ -1,8 +1,8 @@
 package com.Rusya2054.sorters;
 
-import java.util.Arrays;
+import com.Rusya2054.settings.DefaultApplicationSettings;
+
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class BubbleSorter implements Sortable, SliceGateway{
 
@@ -17,7 +17,7 @@ public class BubbleSorter implements Sortable, SliceGateway{
     }
 
     @Override
-    public void sort() {
+    public void sort() throws InterruptedException{
         for (int i=startIndex; i< endIndex; i++){
             for (int j=startIndex; j < endIndex; j++){
                 if (this.data[i] < this.data[j]){
@@ -25,11 +25,7 @@ public class BubbleSorter implements Sortable, SliceGateway{
                     this.data[i] = this.data[j];
                     this.data[j] = temp;
                     IterationCounter.swapCounter.incrementAndGet();
-                    try {
-                        TimeUnit.MILLISECONDS.sleep(20);
-                    } catch (Exception ignore){
-
-                    }
+                    TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
                 }
             }
         }

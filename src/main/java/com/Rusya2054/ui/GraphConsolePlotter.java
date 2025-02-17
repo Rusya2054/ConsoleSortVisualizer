@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 public class GraphConsolePlotter implements Runnable{
-    private final String BAR_STRING_SYMBOL = "x";
+    private final String BAR_STRING_SYMBOL = "█";
     private final String EMPTY_STRING_SYMBOL = " ";
     private Integer[] inputRefData;
 

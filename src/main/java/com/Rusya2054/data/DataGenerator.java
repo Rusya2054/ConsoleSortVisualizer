@@ -11,6 +11,9 @@ public final class DataGenerator {
     }
 
     public static Integer[] getRandomGeneratedList(int N, double mean, double stddev){
+        if (N < 0){
+            return new Integer[] {};
+        }
         return IntStream.range(0, N).boxed().map(a->(int)Math.abs(random.nextGaussian(mean, stddev))).toArray(Integer[]::new);
     }
 }

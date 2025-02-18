@@ -11,7 +11,7 @@ import java.util.*;
 public class ApplicationSettings {
     private static int lengthOfGeneratedData = 20;
     private static int nThreads = 1;
-    public static final long DELAY_IN_MILLISECONDS = 20;
+    public static final long DELAY_IN_MILLISECONDS = 25;
     private static int sorterNumber = 1;
     private final static Map<Integer, LoadedSorters> algoNamesMap = new HashMap<>();
     private static final String SETTINS_STRING_TEMPLATE = "Длина массива: %d, Количество потоков: %d, Сортировщик: %s";

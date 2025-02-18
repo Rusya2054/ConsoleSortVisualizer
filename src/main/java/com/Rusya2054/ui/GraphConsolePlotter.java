@@ -1,6 +1,7 @@
 package com.Rusya2054.ui;
 
 
+import com.Rusya2054.settings.ApplicationSettings;
 import com.Rusya2054.sorters.IterationCounter;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ public class GraphConsolePlotter implements Runnable{
     private final String BAR_STRING_SYMBOL = "█";
     private final String EMPTY_STRING_SYMBOL = " ";
     private Integer[] inputRefData;
+    private volatile boolean toShow = false;
 
     public GraphConsolePlotter(Integer[] inputRefData){
         this.inputRefData = inputRefData;
@@ -49,6 +51,17 @@ public class GraphConsolePlotter implements Runnable{
         return transposedSprings;
     }
 
+
+    public void expandConsoleWidth(int value){
+        try {
+            new ProcessBuilder( "mode", "con", "cons="+value).inheritIO().start().waitFor();
+        } catch (InterruptedException interruptedException){
+            Thread.currentThread().interrupt();
+        } catch (IOException ignore){
+
+        }
+    }
+
     public void plotData(Integer[] data){
         clearConsole();
         System.out.printf("Количество перемещений: %s%n", IterationCounter.swapCounter.get());
@@ -70,13 +83,16 @@ public class GraphConsolePlotter implements Runnable{
         return BAR_STRING_SYMBOL.repeat(integer/10);
     }
 
+    public void setToShow(boolean toShow) {
+        this.toShow = toShow;
+    }
+
     @Override
     public void run() {
-         // TODO: добавить блокировку
         try {
-            while (true){
+            while (toShow){
                 plotData(this.inputRefData);
-                TimeUnit.MILLISECONDS.sleep(20);
+                TimeUnit.MILLISECONDS.sleep(ApplicationSettings.DELAY_IN_MILLISECONDS);
             }
         } catch (Exception ignore){
 

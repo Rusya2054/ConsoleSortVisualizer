@@ -34,11 +34,13 @@ public class ConsoleApplication {
                 Runtime.getRuntime().exit(0);
                 break;
             case 1:
-                // TODO: добавить флаг остановки приложения
                 startVisualization();
                 break;
             case 2:
                 settingsMenu();
+                break;
+            default:
+                startMenu();
                 break;
         }
     }
@@ -58,7 +60,6 @@ public class ConsoleApplication {
                 startMenu();
                 break;
             case 1:
-                // TODO: добавить флаг остановки приложения
                 settingsArrLength();
                 break;
             case 2:
@@ -66,6 +67,9 @@ public class ConsoleApplication {
                 break;
             case 3:
                 settingsAlgorithm();
+                break;
+            default:
+                settingsMenu();
                 break;
         }
     }
@@ -144,6 +148,10 @@ public class ConsoleApplication {
     private void startVisualization(){
         Integer[] generatedData = DataGenerator.getRandomGeneratedList(ApplicationSettings.getLengthOfGeneratedData());
         ui.setInputRefData(generatedData);
+        ui.setToShow(true);
+        if (generatedData.length > 210){
+            ui.expandConsoleWidth(generatedData.length+20);
+        }
         IterationCounter.swapCounter.set(0);
         int nThreads = (ApplicationSettings.getLengthOfGeneratedData() > ApplicationSettings.getNThreads())?ApplicationSettings.getNThreads():ApplicationSettings.getLengthOfGeneratedData()/2;
         ThreadPoolExecutor executor = new ThreadPoolExecutor(nThreads+2,
@@ -181,8 +189,8 @@ public class ConsoleApplication {
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
-
-        executor.shutdownNow();
+        ui.setToShow(false);
+        executor.shutdown();
         System.out.println("Введите любой символ...\n");
         Scanner scanner = new Scanner(System.in);
         scanner.next();

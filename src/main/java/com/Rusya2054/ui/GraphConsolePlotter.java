@@ -5,7 +5,6 @@ import com.Rusya2054.settings.ApplicationSettings;
 import com.Rusya2054.sorters.IterationCounter;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.concurrent.TimeUnit;
 
 public class GraphConsolePlotter implements Runnable{
@@ -43,7 +42,7 @@ public class GraphConsolePlotter implements Runnable{
 
         for (int i = maxStringLenth -1; i >= 0; i--){
             StringBuilder sb = new StringBuilder();
-            for (int j = 0; j < strings.length; j++){
+            for(int j = 0; j < strings.length; j++){
                 sb.append(strings[j].charAt(i));
             }
             transposedSprings[maxStringLenth - i - 1] = sb.toString();

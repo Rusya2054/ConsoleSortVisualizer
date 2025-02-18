@@ -1,9 +1,7 @@
 package com.Rusya2054.sorters;
 
-import com.Rusya2054.data.DataGenerator;
 import com.Rusya2054.settings.ApplicationSettings;
 
-import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 @SorterId(value = 3)

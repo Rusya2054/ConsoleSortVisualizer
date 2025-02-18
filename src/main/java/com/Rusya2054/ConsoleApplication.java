@@ -7,8 +7,6 @@ import com.Rusya2054.sorters.Sortable;
 import com.Rusya2054.ui.GraphConsolePlotter;
 
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;

@@ -5,7 +5,6 @@ import com.Rusya2054.sorters.Sortable;
 import com.Rusya2054.sorters.SorterId;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.util.*;
 
 public class ApplicationSettings {

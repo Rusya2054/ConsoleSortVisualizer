@@ -86,7 +86,7 @@ public class SortingAlgorithmsTest {
     }
 
     @Test
-    public void dataMonotonouslyTest() throws InterruptedException {
+    public void dataMonotonouslyTest(){
         Integer[] data1 = DataGenerator.getRandomGeneratedList(0);
         Assertions.assertTrue(isIncreaseMonotonously(data1));
         Integer[] data2 = DataGenerator.getRandomGeneratedList(1);

@@ -1,9 +1,10 @@
 package com.Rusya2054.sorters;
 
-import com.Rusya2054.settings.DefaultApplicationSettings;
+import com.Rusya2054.settings.ApplicationSettings;
 
 import java.util.concurrent.TimeUnit;
 
+@SorterId(value = 1)
 public class BubbleSorter implements Sortable, SliceGateway{
 
     private final Integer[] data;
@@ -25,7 +26,7 @@ public class BubbleSorter implements Sortable, SliceGateway{
                     this.data[i] = this.data[j];
                     this.data[j] = temp;
                     IterationCounter.swapCounter.incrementAndGet();
-                    TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
+                    TimeUnit.MILLISECONDS.sleep(ApplicationSettings.DELAY_IN_MILLISECONDS);
                 }
             }
         }

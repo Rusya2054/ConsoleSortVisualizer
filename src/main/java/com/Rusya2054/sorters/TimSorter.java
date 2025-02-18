@@ -1,10 +1,11 @@
 package com.Rusya2054.sorters;
 
-import com.Rusya2054.settings.DefaultApplicationSettings;
+import com.Rusya2054.settings.ApplicationSettings;
 
 import java.util.concurrent.TimeUnit;
 
-public class TImSorter implements Sortable, SliceGateway{
+@SorterId(value = 2)
+public class TimSorter implements Sortable, SliceGateway{
 
     private final Integer[] data;
     private final int startIndex;
@@ -12,7 +13,7 @@ public class TImSorter implements Sortable, SliceGateway{
 
     private static final int MIN_RUN = 32;
 
-    public TImSorter(Integer[] data, int startIndex, int endIndex) {
+    public TimSorter(Integer[] data, int startIndex, int endIndex) {
         this.data = data;
         this.startIndex = startIndex;
         this.endIndex = endIndex;
@@ -24,7 +25,7 @@ public class TImSorter implements Sortable, SliceGateway{
         for (int i = startIndex; i < endIndex; i += MIN_RUN) {
             insertionSort(data, i, Math.min((i + MIN_RUN - 1), endIndex - 1));
             IterationCounter.swapCounter.incrementAndGet();
-            TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
+            TimeUnit.MILLISECONDS.sleep(ApplicationSettings.DELAY_IN_MILLISECONDS);
         }
 
         for (int size = MIN_RUN; size < n; size *= 2) {
@@ -35,7 +36,7 @@ public class TImSorter implements Sortable, SliceGateway{
                     merge(data, left, mid, right);
                 }
                 IterationCounter.swapCounter.incrementAndGet();
-                TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
+                TimeUnit.MILLISECONDS.sleep(ApplicationSettings.DELAY_IN_MILLISECONDS);
             }
         }
     }
@@ -49,7 +50,7 @@ public class TImSorter implements Sortable, SliceGateway{
             }
             data[j + 1] = key;
             IterationCounter.swapCounter.incrementAndGet();
-            TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
+            TimeUnit.MILLISECONDS.sleep(ApplicationSettings.DELAY_IN_MILLISECONDS);
         }
     }
 
@@ -71,7 +72,7 @@ public class TImSorter implements Sortable, SliceGateway{
                 data[k++] = rightArray[j++];
             }
             IterationCounter.swapCounter.incrementAndGet();
-            TimeUnit.MILLISECONDS.sleep(DefaultApplicationSettings.DELAY_IN_MILLISECONDS);
+            TimeUnit.MILLISECONDS.sleep(ApplicationSettings.DELAY_IN_MILLISECONDS);
         }
         while (i < len1) {
             data[k++] = leftArray[i++];

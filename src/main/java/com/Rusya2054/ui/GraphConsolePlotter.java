@@ -26,6 +26,9 @@ public class GraphConsolePlotter implements Runnable{
         }
     }
 
+    public void setInputRefData(Integer[] inputRefData) {
+        this.inputRefData = inputRefData;
+    }
 
     private String[] transposeStringArr (String[] strings, final int maxStringLenth){
         String[] transposedSprings = new String[maxStringLenth];

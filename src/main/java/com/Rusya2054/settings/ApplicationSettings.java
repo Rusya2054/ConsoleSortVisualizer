@@ -1,10 +1,13 @@
 package com.Rusya2054.settings;
 
+import com.Rusya2054.ApplicationRunner;
 import com.Rusya2054.sorters.BubbleSorter;
 import com.Rusya2054.sorters.Sortable;
 import com.Rusya2054.sorters.SorterId;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 
 public class ApplicationSettings {
@@ -40,6 +43,13 @@ public class ApplicationSettings {
     }
     static {
         String sortersClassPath = "target/classes/com/Rusya2054/sorters";
+        String[] sortersClassPathArr = new String[] {"target/classes/com/Rusya2054/sorters", "com/Rusya2054/sorters"};
+
+        for (String s: sortersClassPathArr){
+            if (Files.exists(Path.of(s))){
+                sortersClassPath = s;
+            }
+        }
 
         for (File file : Objects.requireNonNull(new File(sortersClassPath).listFiles())){
             if (file.getName().endsWith(".class")){
